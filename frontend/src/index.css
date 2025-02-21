@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Test de style */
+.test-style {
+  color: red;
+  font-size: 24px;
+}

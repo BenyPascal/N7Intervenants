@@ -83,6 +83,15 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
     }
   };
 
+  const removeSkillFromNew = (e: React.MouseEvent, skillToRemove: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setNewProject(prev => ({
+      ...prev,
+      skills: prev.skills?.filter(skill => skill !== skillToRemove) || []
+    }));
+  };
+
   const handleSkillsChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const input = e.currentTarget;
     if (e.key === 'Enter' || e.key === ' ' || e.key === ',') {
@@ -197,7 +206,7 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
                         {skill}
                         <button
                           type="button"
-                          onClick={() => removeSkill(skill)}
+                          onClick={(e) => removeSkill(skill)}
                           className="ml-1 text-blue-600 hover:text-blue-800"
                         >
                           <X size={14} />
@@ -408,7 +417,7 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
                         {skill}
                         <button
                           type="button"
-                          onClick={() => removeSkill(skill)}
+                          onClick={(e) => removeSkillFromNew(e, skill)}
                           className="ml-1 text-blue-600 hover:text-blue-800"
                         >
                           <X size={14} />

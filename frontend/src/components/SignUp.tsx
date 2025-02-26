@@ -4,6 +4,10 @@ import { signUp } from '../config/auth';
 import { createNewUser } from '../config/firebase';
 import { UserPlus } from 'lucide-react';
 
+// Constantes pour les options
+const FILIERES = ['SN', '3EA', 'MF2E'] as const;
+const ANNEES = ['1A', '2A', '3A'] as const;
+
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,8 +21,8 @@ const SignUp: React.FC = () => {
     confirmPassword: '',
     firstname: '',
     lastname: '',
-    filiere: '',
-    annee: ''
+    filiere: FILIERES[0], // Valeur par défaut
+    annee: ANNEES[0] // Valeur par défaut
   });
 
   const handleSubmit = async (e: FormEvent) => {
@@ -51,7 +55,7 @@ const SignUp: React.FC = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -150,28 +154,36 @@ const SignUp: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block mb-2">Filière</label>
-                <input
+                <select
                   name="filiere"
-                  type="text"
                   value={formData.filiere}
                   onChange={handleChange}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded bg-white"
                   required
-                  placeholder="Votre filière"
-                />
+                >
+                  {FILIERES.map((filiere) => (
+                    <option key={filiere} value={filiere}>
+                      {filiere}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div>
                 <label className="block mb-2">Année</label>
-                <input
+                <select
                   name="annee"
-                  type="text"
                   value={formData.annee}
                   onChange={handleChange}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border rounded bg-white"
                   required
-                  placeholder="Votre année"
-                />
+                >
+                  {ANNEES.map((annee) => (
+                    <option key={annee} value={annee}>
+                      {annee}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
 

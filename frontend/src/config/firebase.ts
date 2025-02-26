@@ -23,7 +23,7 @@ import { getStorage } from 'firebase/storage';
 const storage = getStorage(app);
 
 
-export const createNewUser = async (uid: string, email: string, firstname: string, lastname: string, filiere: string, annee: string): Promise<void> => {
+export const createNewUser = async (uid: string, email: string, firstname: string, lastname: string, filiere: "SN" | "3EA" | "MF2E", annee: "1A" | "2A" | "3A"): Promise<void> => {
   try {
     const userRef = doc(db, 'users', uid);
     const newUser: User = {

@@ -29,6 +29,15 @@ export const EmployeeProfile: React.FC<EmployeeProfileProps> = ({ user, onUpdate
     }
   };
 
+  const handleUpdatePersonalInfo = async (updates: Partial<User>) => {
+    try {
+      await onUpdateUser(updates);
+      setShowPersonalInfo(false); // Ferme la modale après la mise à jour
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour:', error);
+    }
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'approved':
@@ -97,43 +106,12 @@ export const EmployeeProfile: React.FC<EmployeeProfileProps> = ({ user, onUpdate
         </div>
       </nav>
 
-      {/* Modale pour les informations personnelles */}
       {showPersonalInfo && (
-        <div 
-          className="fixed inset-0 z-50 overflow-y-auto" 
-          aria-labelledby="modal-title" 
-          role="dialog" 
-          aria-modal="true"
-          onClick={() => setShowPersonalInfo(false)}
-        >
-          <div className="flex items-center justify-center min-h-screen px-4">
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-
-            <div 
-              className="relative bg-white rounded-lg text-left shadow-xl transform transition-all sm:max-w-2xl w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                className="absolute right-4 top-4 text-gray-400 hover:text-gray-500"
-                onClick={() => setShowPersonalInfo(false)}
-              >
-                <span className="sr-only">Fermer</span>
-                <X className="h-5 w-5" />
-              </button>
-              
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
-                <PersonalInformation 
-                  user={user} 
-                  onUpdateUser={async (updates) => {
-                    await onUpdateUser(updates);
-                    setShowPersonalInfo(false);
-                  }} 
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <PersonalInformation
+          user={user}
+          onClose={() => setShowPersonalInfo(false)}
+          onUpdate={handleUpdatePersonalInfo}
+        />
       )}
 
       <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">

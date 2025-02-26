@@ -277,7 +277,7 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Lien GitHub (optionnel)
+                  Lien Projet (GitHub/Drive...) (optionnel)
                 </label>
                 <input
                   type="url"
@@ -485,7 +485,7 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Lien GitHub (optionnel)
+                Lien Projet (Github/Drive...) (optionnel)
               </label>
               <input
                 type="url"

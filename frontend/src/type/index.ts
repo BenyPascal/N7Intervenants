@@ -28,8 +28,8 @@ export interface Skill {
     email: string;
     firstname: string;
     lastname: string;
-    filiere: string;
-    annee: string;
+    filiere: 'SN' | '3EA' | 'MF2E';
+    annee: '1A' | '2A' | '3A';
     role: 'admin' | 'employee';
     status : 'pending' | 'approved' | 'rejected';
     isApproved: boolean;
